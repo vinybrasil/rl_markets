@@ -1,4 +1,4 @@
-#include "catch.hpp"
+#include <catch2/catch_all.hpp>
 #include "market/book.h"
 #include "utilities/comparison.h"
 
@@ -11,6 +11,7 @@ typedef std::map<double, long, FloatComparator<>> TMAP;
 SCENARIO("book handles market depth data", "[Market][Book]") {
 
     GIVEN("an ask book with 2 levels") {
+        printf("VARI CORINTHIANS \n");
         market::AskBook<2> book;
 
         array<double, 2> prices{100.0, 200.0};

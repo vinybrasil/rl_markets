@@ -1,4 +1,4 @@
-#include "catch.hpp"
+#include <catch2/catch_all.hpp>
 #include "utilities/accumulators.h"
 
 using namespace std;
@@ -11,13 +11,13 @@ SCENARIO("a sequence of values 1:1:5", "[Accumulator][RollingMedian]") {
         for (int i = 1; i <= 3; i++)
             rm.push((float) i);
 
-        REQUIRE(rm.mean() == Approx(2.0f));
-        REQUIRE(rm.var() == Approx(1.0f));
+        REQUIRE(rm.mean() == Catch::Approx(2.0f));
+        REQUIRE(rm.var() == Catch::Approx(1.0f));
 
         for (int i = 4; i <= 5; i++) {
             rm.push(i);
-            REQUIRE(rm.mean() == Approx(i-1.0f));
-            REQUIRE(rm.var() == Approx(1.0f));
+            REQUIRE(rm.mean() == Catch::Approx(i-1.0f));
+            REQUIRE(rm.var() == Catch::Approx(1.0f));
         }
     }
 
@@ -28,7 +28,7 @@ SCENARIO("a sequence of values 1:1:5", "[Accumulator][RollingMedian]") {
             rm.push((float) i);
 
         THEN("the median should be 3") {
-            REQUIRE(rm.median() == Approx(3.0f));
+            REQUIRE(rm.median() == Catch::Approx(3.0f));
         }
     }
 }
@@ -42,16 +42,16 @@ SCENARIO("a sequence of values 10.5, 11.5, 11.5, 11.5, 12.5", "[Accumulator][Rol
         rm.push(11.5);
         rm.push(11.5);
 
-        REQUIRE(rm.mean() == Approx(11.1667f));
-        REQUIRE(rm.var() == Approx(1.0f / 3));
+        REQUIRE(rm.mean() == Catch::Approx(11.1667f));
+        REQUIRE(rm.var() == Catch::Approx(1.0f / 3));
 
         rm.push(11.5);
-        REQUIRE(rm.mean() == Approx(11.5f));
-        REQUIRE(rm.var() == Approx(0.0f).scale(1.0f));
+        REQUIRE(rm.mean() == Catch::Approx(11.5f));
+        REQUIRE(rm.var() == Catch::Approx(0.0f).scale(1.0f));
 
         rm.push(12.5);
-        REQUIRE(rm.mean() == Approx(11.8333f));
-        REQUIRE(rm.var() == Approx(1.0f / 3));
+        REQUIRE(rm.mean() == Catch::Approx(11.8333f));
+        REQUIRE(rm.var() == Catch::Approx(1.0f / 3));
     }
 
     GIVEN("a rolling median") {
@@ -64,7 +64,7 @@ SCENARIO("a sequence of values 10.5, 11.5, 11.5, 11.5, 12.5", "[Accumulator][Rol
         rm.push(12.5);
 
         THEN("the median should be 3") {
-            REQUIRE(rm.median() == Approx(11.5f));
+            REQUIRE(rm.median() == Catch::Approx(11.5f));
         }
     }
 }

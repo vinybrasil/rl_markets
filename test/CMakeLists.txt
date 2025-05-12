@@ -1,14 +1,14 @@
 file(GLOB_RECURSE TEST_FILES RELATIVE ${CMAKE_CURRENT_SOURCE_DIR} *.cpp)
 
-include_directories(${CATCH_INCLUDE_DIR})
+find_package(Catch2 REQUIRED)
 
-# add_catch_test(<target> <sources>...)
-function(add_catch_test target)
-    add_executable(${target} main.cpp ${ARGN})
-    target_link_libraries(${target}
-        rl_engine)
+# Create test executable
+add_executable(do_tests main.cpp ${TEST_FILES})
 
-    add_test(${target} ${CMAKE_BINARY_DIR}/${target})
-endfunction()
+target_link_libraries(do_tests PRIVATE 
+    Catch2::Catch2WithMain  
+    rl_engine
+)
 
-add_catch_test(do_tests ${TEST_FILES})
+# Add test
+add_test(NAME do_tests COMMAND do_tests)

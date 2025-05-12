@@ -1,4 +1,4 @@
-#include "catch.hpp"
+#include <catch2/catch_all.hpp>
 #include "market/market.h"
 
 using namespace std;
@@ -94,7 +94,7 @@ SCENARIO("CRDI.MI", "[Market]") {
         }
 
         THEN("a round trip should round the price up to the nearest tick") {
-            REQUIRE(m->ToPrice(m->ToTicks(1.96885)) == Approx(1.969));
+            REQUIRE(m->ToPrice(m->ToTicks(1.96885)) == Catch::Approx(1.969));
         }
     }
 }
